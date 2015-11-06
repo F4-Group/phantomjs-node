@@ -20,13 +20,12 @@
   };
 
   onSignal = function() {
-    var i, len, phantom, results;
-    results = [];
+    var i, len, phantom;
     for (i = 0, len = phanta.length; i < len; i++) {
       phantom = phanta[i];
-      results.push(phantom.exit());
+      phantom.exit();
     }
-    return results;
+    return process.exit();
   };
 
   process.on('exit', onSignal);
