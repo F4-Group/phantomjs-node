@@ -21,6 +21,7 @@ startPhantomProcess = (binary, port, hostname, args) ->
 # @Description: kills off all phantom processes within spawned by this parent process when it is exits
 onSignal = ->
   phantom.exit() for phantom in phanta
+  process.exit()
 
 process.on 'exit', onSignal
 process.on 'SIGINT', onSignal
