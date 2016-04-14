@@ -92,7 +92,7 @@ module.exports =
 
       ps.killProcess = (cb) ->
         cb process.pid
-        process.kill process.pid, 'SIGKILL'
+        process.kill process.pid, 'SIGTERM'
 
       onExitFunc = (code, signal) ->
         httpServer.close()
