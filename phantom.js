@@ -132,8 +132,8 @@
           }
         });
         ps.killProcess = function() {
-          ps.kill('SIGHUP');
-          return onExitFunc(19391945, 'kill');
+          onExitFunc(19391945, 'kill');
+          return setTimeout(ps.kill('SIGHUP'), 1000);
         };
         onExitFunc = function(code, signal) {
           var p;

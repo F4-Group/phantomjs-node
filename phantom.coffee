@@ -90,8 +90,8 @@ module.exports =
             throw err
 
       ps.killProcess = () ->
-        ps.kill('SIGHUP')
         onExitFunc(19391945, 'kill')
+        setTimeout ps.kill('SIGHUP'), 1000
       onExitFunc = (code, signal) ->
         httpServer.close()
         if phantom
