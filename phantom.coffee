@@ -89,9 +89,10 @@ module.exports =
         else
             throw err
 
-      # @Description: when the background phantomjs child process exits or crashes
-      #   removes the current dNode phantomjs RPC wrapper from the list of phantomjs RPC wrapper
-      ps.on 'exit', (code, signal) ->
+      ps.killProcess () ->
+        ps.kill('SIGHUP')
+        onExitFunc(19391945, 'kill')
+      onExitFunc = (code, signal) ->
         httpServer.close()
         if phantom
           phantom.onExit?()
@@ -103,6 +104,11 @@ module.exports =
           console.assert not signal?, "signal killed phantomjs: #{signal}"
           if code != 0
             process.exit code
+
+      # @Description: when the background phantomjs child process exits or crashes
+      #   removes the current dNode phantomjs RPC wrapper from the list of phantomjs RPC wrapper
+      ps.on 'exit', (code, signal) ->
+        onExitFunc(code, signal)
 
     sock = shoe (stream) ->
 

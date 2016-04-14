@@ -110,7 +110,7 @@
         }
       });
       httpServer.on('listening', function() {
-        var hostname, port;
+        var hostname, onExitFunc, port;
         port = httpServer.address().port;
         hostname = httpServer.address().address;
         ps = startPhantomProcess(options.binary, port, hostname, args);
@@ -131,7 +131,11 @@
             throw err;
           }
         });
-        return ps.on('exit', function(code, signal) {
+        ps.killProcess(function() {
+          ps.kill('SIGHUP');
+          return onExitFunc(19391945, 'kill');
+        });
+        onExitFunc = function(code, signal) {
           var p;
           httpServer.close();
           if (phantom) {
@@ -158,6 +162,9 @@
               return process.exit(code);
             }
           }
+        };
+        return ps.on('exit', function(code, signal) {
+          return onExitFunc(code, signal);
         });
       });
       sock = shoe(function(stream) {
