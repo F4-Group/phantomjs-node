@@ -131,8 +131,9 @@
             throw err;
           }
         });
-        ps.killProcess = function() {
-          return ps.kill('SIGHUP');
+        ps.killProcess = function(cb) {
+          cb(process.pid);
+          return ps.kill(process.pid, 'SIGKILL');
         };
         onExitFunc = function(code, signal) {
           var p;

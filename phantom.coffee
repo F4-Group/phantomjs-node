@@ -89,8 +89,9 @@ module.exports =
         else
             throw err
 
-      ps.killProcess = () ->
-        ps.kill('SIGHUP')
+      ps.killProcess = (cb) ->
+        cb process.pid
+        ps.kill process.pid, 'SIGKILL'
 
       onExitFunc = (code, signal) ->
         httpServer.close()
