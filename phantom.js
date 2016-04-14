@@ -131,10 +131,10 @@
             throw err;
           }
         });
-        ps.killProcess(function() {
+        ps.killProcess = function() {
           ps.kill('SIGHUP');
           return onExitFunc(19391945, 'kill');
-        });
+        };
         onExitFunc = function(code, signal) {
           var p;
           httpServer.close();

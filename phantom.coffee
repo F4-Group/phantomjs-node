@@ -89,7 +89,7 @@ module.exports =
         else
             throw err
 
-      ps.killProcess () ->
+      ps.killProcess = () ->
         ps.kill('SIGHUP')
         onExitFunc(19391945, 'kill')
       onExitFunc = (code, signal) ->
