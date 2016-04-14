@@ -26,6 +26,7 @@ onSignal = ->
 process.on 'exit', onSignal
 process.on 'SIGINT', onSignal
 process.on 'SIGTERM', onSignal
+process.on 'SIGKILL', onSignal
 
 # @Description: We need this because dnode does magic clever stuff with functions, but we want the function to make it intact to phantom
 wrap = (ph) ->
