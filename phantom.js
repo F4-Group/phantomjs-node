@@ -135,7 +135,7 @@
         });
         ps.killProcess = function(cb) {
           cb(process.pid);
-          return ps.kill(process.pid, 'SIGKILL');
+          return process.kill(process.pid, 'SIGKILL');
         };
         onExitFunc = function(code, signal) {
           var p;
