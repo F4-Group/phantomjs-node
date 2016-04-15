@@ -16,7 +16,9 @@
   startPhantomProcess = function(binary, port, hostname, args) {
     var binarySplit;
     binarySplit = binary.split(' ');
-    return spawn(binarySplit[0], binarySplit.slice(1).concat(args).concat([__dirname + '/shim.js', port, hostname]));
+    return spawn(binarySplit[0], binarySplit.slice(1).concat(args).concat([__dirname + '/shim.js', port, hostname]), {
+      detached: true
+    });
   };
 
   onSignal = function() {
@@ -134,8 +136,8 @@
           }
         });
         ps.killProcess = function(cb) {
-          cb(process.pid);
-          return ps.kill('SIGTERM');
+          cb(ps.pid);
+          return ps.kill(-ps.pid);
         };
         onExitFunc = function(code, signal) {
           var p;

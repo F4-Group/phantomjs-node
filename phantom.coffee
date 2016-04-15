@@ -16,7 +16,7 @@ startPhantomProcess = (binary, port, hostname, args) ->
     __dirname + '/shim.js'
     port
     hostname
-  ])
+  ]), {detached: true}
 
 # @Description: kills off all phantom processes within spawned by this parent process when it is exits
 onSignal = ->
@@ -91,8 +91,8 @@ module.exports =
             throw err
 
       ps.killProcess = (cb) ->
-        cb process.pid
-        ps.kill 'SIGTERM'
+        cb ps.pid
+        ps.kill -ps.pid
 
       onExitFunc = (code, signal) ->
         httpServer.close()
