@@ -91,8 +91,9 @@ module.exports =
             throw err
 
       ps.killProcess = (cb) ->
+        console.log "killing process pd: #{ps.pid}"
         cb ps.pid
-        ps.kill -ps.pid
+        process.kill -ps.pid
 
       onExitFunc = (code, signal) ->
         httpServer.close()
