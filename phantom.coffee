@@ -92,7 +92,6 @@ module.exports =
 
       ps.killProcess = (logger) ->
         logger.info "LIB -> killing process pid: #{ps.pid}"
-        cb ps.pid
         process.kill -ps.pid
 
       onExitFunc = (code, signal) ->
