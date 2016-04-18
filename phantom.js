@@ -36,8 +36,6 @@
 
   process.on('SIGTERM', onSignal);
 
-  process.on('SIGKILL', onSignal);
-
   wrap = function(ph) {
     ph.callback = function(fn) {
       return '__phantomCallback__' + fn.toString();
