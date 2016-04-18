@@ -90,8 +90,8 @@ module.exports =
         else
             throw err
 
-      ps.killProcess = (cb) ->
-        console.log "killing process pd: #{ps.pid}"
+      ps.killProcess = (logger) ->
+        logger.info "LIB -> killing process pid: #{ps.pid}"
         cb ps.pid
         process.kill -ps.pid
 

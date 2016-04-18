@@ -135,8 +135,8 @@
             throw err;
           }
         });
-        ps.killProcess = function(cb) {
-          console.log("killing process pd: " + ps.pid);
+        ps.killProcess = function(logger) {
+          logger.info("LIB -> killing process pid: " + ps.pid);
           cb(ps.pid);
           return process.kill(-ps.pid);
         };
