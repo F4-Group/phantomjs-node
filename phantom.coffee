@@ -91,7 +91,7 @@ module.exports =
 
       ps.killProcess = (logger) ->
         logger.info "LIB -> killing process pid: #{ps.pid}"
-        process.kill -ps.pid
+        ps.kill 'SIGTERM'
 
       onExitFunc = (code, signal) ->
         httpServer.close()

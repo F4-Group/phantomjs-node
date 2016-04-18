@@ -135,7 +135,7 @@
         });
         ps.killProcess = function(logger) {
           logger.info("LIB -> killing process pid: " + ps.pid);
-          return process.kill(-ps.pid);
+          return ps.kill('SIGTERM');
         };
         onExitFunc = function(code, signal) {
           var p;
